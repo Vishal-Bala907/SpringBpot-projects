@@ -6,6 +6,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+import com.chat.modals.ChatMessage;
 import com.chat.modals.MessageType;
 
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,7 @@ public class WebSocketEventListener {
 		String username = (String)accessor.getSessionAttributes().get("username");
 		if(username != null) {
 			log.info("User disconnected {}" + username);
-			var message = com.chat.modals.ChatMessage.builder()
+			var message = ChatMessage.builder()
 										.type(MessageType.LEAVE)
 										.sender(username)
 										.build();

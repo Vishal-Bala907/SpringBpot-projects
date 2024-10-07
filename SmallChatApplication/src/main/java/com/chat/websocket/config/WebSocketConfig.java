@@ -16,6 +16,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	 */
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
+		/*
+		 * /ws is the HTTP URL for the endpoint to which a WebSocket (or SockJS)
+		 * client needs to connect for the WebSocket handshake.
+		 */
 		registry.addEndpoint("/ws").withSockJS();
 	}
 
@@ -33,7 +37,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 		registry.enableSimpleBroker("/topic");
+		/*
+		 * STOMP messages whose destination header begins with /app are routed
+		 * to @MessageMapping methods in @Controller classes.
+		 */
 		registry.setApplicationDestinationPrefixes("/app");
+
 	}
 
 }
