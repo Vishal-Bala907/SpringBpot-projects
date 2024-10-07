@@ -1,0 +1,14 @@
+a{
+	text-decoration: none;
+}
+
+a:visited{
+	color: aqua;
+}
+a:active{
+	color: tomato;
+}
+a:hover{
+	/*background-color: bisque;*/
+	color: white;
+}

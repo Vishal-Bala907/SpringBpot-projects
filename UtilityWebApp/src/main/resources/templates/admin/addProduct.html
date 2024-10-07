@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+	th:replace="~{personal/dashboard::base(~{::section})}">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/add-product.css}">
+</head>
+
+<body>
+	<section>
+		<div class="add-product-section">
+			<form>
+				<div class="additemsform">
+				
+					<div class="add-product-form-items">
+						<label for="p-name" class="form-label">Enter Name</label> <input
+							type="text" class="form-control" id="p-name"
+							aria-describedby="emailHelp" name="productName">
+					</div>
+					<div class="add-product-form-items">
+						<label for="exampleInputPassword1" class="form-label">Type</label>
+						<select name="noteBookType" id="nb-type">
+							<option value="spiral">spiral</option>
+							<option value="composition">composition</option>
+							<option value="Scientific">Scientific</option>
+							<option value="Novelty">Novelty</option>
+							<option value="Business">Business</option>
+						</select>
+					</div>
+					<div class="add-product-form-items">
+						<label class="form-check-label" for="n-price">Price</label> <input
+							type="text" class="form-control" id="n-price"
+							aria-describedby="emailHelp" name="productName">
+					</div>
+					<div class="add-product-form-items">
+						<label for="formFileLg" class="form-label">Select Image</label> <input
+							class="form-control form-control-lg" id="formFileLg" type="file">
+					</div>
+					<div class="add-product-form-items">
+					<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org/" th:fragment="base(content)">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap')
+	;
+</style>
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+
+<link rel="stylesheet" th:href="@{/css/index-style.css}" />
+<link rel="stylesheet" th:href="@{/css/index-body.css}" />
+<link rel="stylesheet" th:href="@{/css/links.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/products.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/add-product.css}">
+
+</head>
+<body style="font-family: 'Oxygen', sans-serif;">
+	<header class="header">
+		<ul class="navlinks">
+			<li><a class="nav-items" th:href="@{/home}">Home</a></li>
+			<li><a class="nav-items" href="#">Products</a></li>
+			<li><a class="nav-items" th:href="@{/addProducts}">Add
+					Product</a></li>
+		</ul>
+		<ul class="navlinks">
+			<li><a class="nav-items" href="#">About</a></li>
+			<li><a class="nav-items" href="#">Profile</a></li>
+		</ul>
+	</header>
+	<span id="menuButton" class="material-symbols-outlined menu-button">
+		menu </span>
+
+	<div class="section-container container col-8">
+		<section th:replace="${content}"></section>
+	</div>
+
+
+
+	<script type="text/javascript"
+		th:src="@{/javascript/screen-menu-item-click.js}"></script>
+</body>
+</html>

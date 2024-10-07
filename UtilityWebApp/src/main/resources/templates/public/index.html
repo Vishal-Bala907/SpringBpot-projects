@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap')
+	;
+</style>
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+<link rel="stylesheet" th:href="@{/css/index-style.css}" />
+<link rel="stylesheet" th:href="@{/css/index-body.css}" />
+<link rel="stylesheet" th:href="@{/css/links.css}" />
+<link rel="stylesheet" th:href="@{/css/error.css}" />
+</head>
+<body style="font-family: 'Oxygen', sans-serif;">
+	<header class="header">
+		<ul class="navlinks">
+			<li><a class="nav-items" th:href="@{/home}">Home</a></li>
+			<li><a class="nav-items" href="#">My Addresses</a></li>
+			<li><a class="nav-items" href="#">Help</a></li>
+		</ul>
+		<ul class="navlinks">
+			<li><a class="nav-items" href="#">About</a></li>
+			<li><a class="nav-items" href="#">Profile</a></li>
+		</ul>
+	</header>
+	<span id="menuButton" class="material-symbols-outlined menu-button">
+		menu </span>
+
+	<div class="index-page">
+
+
+		<div class="login-signup-mainCard">
+			<div class="sign-up">
+				<div class="login-button-area">
+					<section class="signup-button-section">
+						<h3>Click Here To Login</h3>
+						<button id="signup-login-button" class="login-button">Login</button>
+					</section>
+				</div>
+				<div class="signup-form-area">
+					<form th:action="@{/register}" method="post" class="signup-form"
+						th:object="${user}">
+
+						<span class="error">
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+								<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+								</div>
+						</span>
+
+						<div class="form-field">
+							<label for="name">Enter Your Name</label> <input type="text"
+								id="name" name="username" value="username">
+						</div>
+
+						<div class="form-field">
+							<label for="email">Enter Your Email</label> <input type="email"
+								id="email" name="email">
+						</div>
+
+						<div class="form-field">
+							<label for="password">Enter Your Password</label> <input
+								type="password" id="password" name="password">
+						</div>
+
+						<div class="form-field">
+							<label for="number">Enter Your Ph. Number</label> <input
+								type="text" id="number" name="number">
+						</div>
+
+						<div class="form-field-check">
+							<label for="check">Agree terms. & Cond.</label> <input
+								type="checkbox" id="check" name="check">
+						</div>
+						<input type="hidden" th:csrf />
+						<div class="form-field">
+							<Button class="submit-button" type="submit">Submit</Button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+			<div class="login">
+				<div class="login-button-area">
+					<section class="signup-button-section">
+						<h3>Click Here To SignUp</h3>
+						<button id="login-signup-button" class="submit-button">SignUp</button>
+					</section>
+				</div>
+				<div class="signup-form-area">
+					<form th:action="@{/login}" method="post" class="signup-form">
+						<div class="form-field">
+							<label for="name">Enter Your Name</label> <input type="text"
+								id="LoginName" name="username" value="username">
+						</div>
+
+						<div class="form-field">
+							<label for="password">Enter Your Password</label> <input
+								type="password" id="LoginPassword" name="password">
+						</div>
+
+						<div class="form-field">
+							<Button class="login-button" type="submit">Login</Button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 	<a th:href="@{/loginUser}"><h1>Hello EveryOne</h1>login</a>
+ -->
+	<script type="text/javascript"
+		th:src="@{/javascript/screen-menu-item-click.js}"></script>
+</body>
+</html>
