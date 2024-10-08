@@ -47,11 +47,11 @@ public class DataController {
 		}
 
 	}
-	
+	@CrossOrigin(origins = "http://localhost:5173/" , methods = RequestMethod.GET)
 	@GetMapping("/get/{days}")
 	public ResponseEntity<List<DailyDetails>> getDetails(@PathVariable int days) {
 		List<DailyDetails> details = dailyService.getDetails(days);
-		return new ResponseEntity<List<DailyDetails>>(details,HttpStatus.FOUND);
+		return new ResponseEntity<List<DailyDetails>>(details,HttpStatus.OK);
 	}
 	
 	

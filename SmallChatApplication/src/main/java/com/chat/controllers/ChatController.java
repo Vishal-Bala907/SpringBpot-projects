@@ -21,6 +21,13 @@ public class ChatController {
 	 * The return value is broadcast to all subscribers of /topic/public, as
 	 * specified in the @SendTo annotation
 	 */
+	
+	/*
+	 * You can use the @SendTo and @SendToUser annotations to customize the
+	 * destination of the output message. @SendTo is used to customize the target
+	 * destination or to specify multiple destinations. @SendToUser is used to
+	 * direct the output message to only the user associated with the input message
+	 */
 	@MessageMapping("/chat.sendMessage")
 	@SendTo("/topic/public")
 	public ChatMessage sendMessage(@Payload ChatMessage message) {

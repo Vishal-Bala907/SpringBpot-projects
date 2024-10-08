@@ -3,6 +3,7 @@ package com.dpm.imple.services;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.dpm.interfaces.services.ServiceInterface;
+import com.dpm.modals.ChartData;
 import com.dpm.modals.DailyDetails;
 import com.dpm.modals.SaveStatus;
 import com.dpm.repos.DailyRepository;
@@ -55,6 +57,22 @@ public class DailyService implements ServiceInterface {
 		List<DailyDetails> details = repository.getDetails(date2, date1);
 		
 		return details;
+	}
+
+	@Override
+	public List<ChartData> getChartData(int days) {
+		LocalDate date1 = LocalDate.now();
+		LocalDate date2 = LocalDate.now().minusDays(days);
+		List<DailyDetails> details = repository.getDetails(date2, date1);
+		List<ChartData> data = new ArrayList<>();
+		details.forEach(chart->{
+			ChartData chartData = new ChartData();
+			chartData.setTime(chart.getMinutes());
+			chartData.setTitle(chart.getTitle());
+			data.add(chartData);
+		});
+		
+		return data;
 	}
 	
 	
