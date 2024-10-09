@@ -38,9 +38,9 @@ public class DailyService implements ServiceInterface {
 		Duration duration = Duration.between(parse, parse1);
 
 		dailyDetails.setMinutes(duration.toMinutes());
-		
+
 		dailyDetails.setDate(LocalDate.now());
-		
+
 		repository.save(dailyDetails);
 		saveStatus = new SaveStatus();
 		saveStatus.setErrors(null);
@@ -53,10 +53,19 @@ public class DailyService implements ServiceInterface {
 	public List<DailyDetails> getDetails(int days) {
 		LocalDate date1 = LocalDate.now();
 		LocalDate date2 = LocalDate.now().minusDays(days);
-		
-		List<DailyDetails> details = repository.getDetails(date2, date1);
-		
-		return details;
+
+		List<DailyDetails> details = null;
+
+		// today
+		if (days == 0) {
+			details = repository.getDetails(date1, date1);
+		} else if (days == 1) {
+			details = repository.getDetails(date2, date2);
+		} else {
+			details = repository.getDetails(date2, date1);
+		}
+
+		return details.isEmpty() ? null : details;
 	}
 
 	@Override
@@ -65,16 +74,30 @@ public class DailyService implements ServiceInterface {
 		LocalDate date2 = LocalDate.now().minusDays(days);
 		List<DailyDetails> details = repository.getDetails(date2, date1);
 		List<ChartData> data = new ArrayList<>();
-		details.forEach(chart->{
+		details.forEach(chart -> {
 			ChartData chartData = new ChartData();
 			chartData.setTime(chart.getMinutes());
 			chartData.setTitle(chart.getTitle());
 			data.add(chartData);
 		});
-		
+
 		return data;
 	}
-	
-	
+
+	public List<DailyDetails> getByDate(LocalDate date) {
+		List<DailyDetails> byDate = repository.findByDate(date);
+		if (byDate.isEmpty()) {
+			return null;
+		} else {
+			return byDate;
+		}
+
+	}
+
+	@Override
+	public boolean deleteDataById(int id) {
+		repository.deleteById(id);
+		return true;
+	}
 
 }

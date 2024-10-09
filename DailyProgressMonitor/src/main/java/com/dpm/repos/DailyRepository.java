@@ -15,4 +15,6 @@ public interface DailyRepository extends JpaRepository<DailyDetails, Integer> {
 	@Query("SELECT d FROM DailyDetails d WHERE d.date >= :date1 AND d.date <= :date2 ")
 	public List<DailyDetails> getDetails(LocalDate date1 ,LocalDate date2);
 	
+	public List<DailyDetails> findByDate(LocalDate date);
+	
 }
