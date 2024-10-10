@@ -2,6 +2,7 @@ package com.dpm.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -75,6 +75,16 @@ public class DataController {
 	public ResponseEntity<String> deleteTask(@PathVariable int id) {
 		dailyService.deleteDataById(id);
 		return new ResponseEntity<String>("Deleted...",HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:5173/" , methods = RequestMethod.GET)
+	@GetMapping("/get/days/{days}")
+	public ResponseEntity<Map<LocalDate, List<DailyDetails>>> getDataOfDays(@PathVariable int days) {
+		List<DailyDetails> details = dailyService.getDetails(days);
+		Map<LocalDate, List<DailyDetails>> dataOfDays = dailyService.getDataOfDays(details, days);
+		System.out.println(dataOfDays);
+		return new ResponseEntity<Map<LocalDate,List<DailyDetails>>>(dataOfDays,HttpStatus.OK);
+	
 	}
 	
 	

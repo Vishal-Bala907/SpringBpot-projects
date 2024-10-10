@@ -4,7 +4,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -98,6 +100,27 @@ public class DailyService implements ServiceInterface {
 	public boolean deleteDataById(int id) {
 		repository.deleteById(id);
 		return true;
+	}
+
+	public Map<LocalDate, List<DailyDetails>> getDataOfDays(List<DailyDetails> dailyDetails, int days) {
+		Map<LocalDate, List<DailyDetails>> map = new HashMap<>();
+		System.out.println(dailyDetails);
+		int i = 0;
+		for (i=0;i < days; i++) {
+			LocalDate date = LocalDate.now().minusDays(i);
+			if (!map.containsKey(date)) {
+				List<DailyDetails> list = dailyDetails.stream().filter((dt) -> {
+					return dt.getDate().equals(date);
+				}).toList();
+				if(list.size() != 0) {
+					map.put(date, list);
+				}
+				System.out.println(list);
+			}
+
+		}
+
+		return map;
 	}
 
 }
